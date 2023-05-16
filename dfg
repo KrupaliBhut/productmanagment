@@ -1,0 +1,10 @@
+*15-05-2023
+Technology : Nodejs
+
+task :
+- create/insert data record in database 
+
+Learning :
+- nest js documentation
+- learning about prisma
+- typescript
