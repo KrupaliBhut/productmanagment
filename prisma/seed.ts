@@ -1,4 +1,4 @@
-import { user_relation } from './migrations/user_relation';
+import { user_relation, permission } from './migrations/user_relation';
 import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
@@ -11,11 +11,41 @@ async function main() {
   }
 }
 
+async function main2() {
+  for (const Permission of permission) {
+    await prisma.permission.createMany({
+      data: Permission,
+    });
+  }
+}
+// async function main3() {
+//   for (const Roles_has_permissions of roles_has_permissions) {
+//     await prisma.roles_has_permissions.createMany({
+//       data: Roles_has_permissions,
+//     });
+//   }
+// }
 main()
   .catch((e) => {
     console.log(e);
-    process.exit(1);
+    process.exit();
   })
   .finally(() => {
     prisma.$disconnect();
   });
+main2()
+  .catch((e) => {
+    console.log(e);
+    process.exit();
+  })
+  .finally(() => {
+    prisma.$disconnect();
+  });
+// main3()
+//   .catch((e) => {
+//     console.log(e);
+//     process.exit();
+//   })
+//   .finally(() => {
+//     prisma.$disconnect();
+//   });

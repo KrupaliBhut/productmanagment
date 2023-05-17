@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ragistration Form</title>
+</head>
+<link rel="stylesheet" href="/css/registration.css">
+
+<body>
+    <div class="container">
+        <div class="form-container">
+            <!-- <div class="header"> -->
+            <div class="logo">
+            </div>
+            <!-- </div> -->
+            <h3>Welcome </h3>
+            <div class="form">
+
+                <form method="post" id="form" onsubmit="validate()" action="/reg">
+                    <div class="row">
+                        <label class="label">Name:</label>
+                        <input class="input" type="text" name="name" placeholder="Enter name" id="name">
+                    </div>
+                    <span id="error-name" class="error"></span>
+                    <div class="row">
+                        <label class="label">Email:</label>
+                        <input class="input" type="email" name="email" placeholder="Enter email" id="email">
+                    </div>
+                    <span id="error-email" class="error"></span>
+                    <div class="row">
+                        <label class="label">Password:</label>
+                        <input class="input" type="password" name="passward" placeholder="Enter password" id="psw">
+                    </div>
+                    <span id="error-psw" class="error"></span>
+                    <div class="row">
+                     <!-- <input type="submit" class="btn" value="Sign Up"></a> -->
+                   
+                    </div>
+                    <div>
+                        <div class="dont">
+                            <a href="/login">signup</a>
+                            <a href="/login">Login Here</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+<script type="text/javascript">
+
+    async function validate() {
+
+
+        var name = document.getElementById('name').value;
+        var email = document.getElementById('email').value;
+        var psw = document.getElementById('psw').value;
+
+        console.log(name, email, psw);
+
+        // errors - msgs
+
+        var error_name = document.getElementById('error-name');
+        var error_email = document.getElementById('error-email');
+        var error_psw = document.getElementById('error-psw');
+
+        if (name == '' || name == null) {
+            error_name.innerHTML = "please enter name";
+            console.log('false');
+            event.preventDefault();
+        }
+
+
+        else if (email.length == 0 || email == null) {
+            error_name.innerHTML = " ";
+            error_email.innerHTML = "please enter email";
+            console.log('false');
+            event.preventDefault();
+        }
+
+        else if (psw.length == 0 && psw != null) {
+            error_email.innerHTML = " ";
+            error_psw.innerHTML = "please enter psw";
+
+            console.log(' psw flse');
+            event.preventDefault();
+
+        }
+        else if (psw.length < 8) {
+            error_email.innerHTML = " ";
+            error_psw.innerHTML = "password length must be atleast 8 characters";
+
+            event.preventDefault();
+        }
+        // else if (psw.search(/[a-z]/) < 0) {
+        //     error_email.innerHTML = " ";
+        //     error_psw.innerHTML = "Your password needs a lower case letter";
+        //     event.preventDefault();
+        // }
+        // else if (psw.search(/[A-Z]/) < 0) {
+        //     error_email.innerHTML = " ";
+        //     error_psw.innerHTML = "Your password needs a upper case letter";
+        //     event.preventDefault();
+        // }
+        // else if (psw.search(/[1-9]/) < 0) {
+        //     error_email.innerHTML = " ";
+        //     error_psw.innerHTML = "Your password needs a number";
+        //     event.preventDefault();
+        // }
+        else if (psw != cpsw) {
+            error_psw.innerHTML = " ";
+            error_cpsw.innerHTML = "please match cpsw";
+            console.log(' cpsw flse');
+            event.preventDefault();
+        }       
+        else {
+            error_cpsw.innerHTML = " ";
+            console.log("right password");
+            return true;
+        }
+
+        var res = await fetch("/check_email");
+        var data = await res.json();
+        console.log(data);
+
+        data.result.forEach(element => {
+            if (element.email == email) {
+                error_email.innerHTML = "enter email properly";
+                console.log('done');
+                event.preventDefault();
+            }
+            return true;
+        });
+    }
+
+</script>
+
+</html>

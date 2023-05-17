@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Welcome to login</title>
+      <link rel="stylesheet" href="/css/login.css">
+</head>
+
+<body>
+      <div class="container">
+            <div class="form-container">
+                  <div class="logo">
+                        <img src="/images/logo.svg" alt="">
+                  </div>
+
+                  <!-- </div> -->
+
+
+                  <h3>Welcome back</h3>
+                  <div class="form">
+                        <form method="post" id="form" onsubmit="validate()" action="/login">
+
+                              <div class="row">
+                                    <label class="label">Email</label>
+                                    <input class="input" type="email" name="email" placeholder="enter email " id="email"
+                                          onchange="check_email()">
+                              </div>
+                              <span id="error-email" class="error"></span>
+                              <div class="row">
+                                    <div class="row">
+                                          <label class="label">Password</label>
+                                          <input class="input" type="password" name="password"
+                                                placeholder="Enter password" id="psw" onchange="check_pass()">
+                                    </div>
+
+                                    <span id="error-psw" class="error"></span>
+
+                                    <div>
+                                          <div class="row">
+                                                <!-- <input type="submit" class="btn" value="Login" name="login" id="login"></a> -->
+                                                <a href="/dashboard">login</a>
+                                          </div> 
+                                    </div>
+                                    <div>
+
+                                          <div class="dont">
+                                                <div>
+                                                      <div class="dont">
+                                                            <h5>Forgot password ?</h5>
+                                                            <a href="/forgot_pass">Click  Here</a>
+                                                            <a href="/verification">for verification</a>
+                                                      </div>
+                                                </div>
+                                          </div>
+                        </form>
+                                    </div>
+            </div>
+        
+      </div>
+</body>
+<script>
+      async function check_email() {
+           
+            // mail compare
+            document.getElementById("error-email").innerHTML = "";
+            var email = document.getElementById("email").value;
+            // console.log(email);
+        
+            var login = document.getElementById("login").value;
+
+            var res = await fetch("/checkemail");
+
+            var data = await res.json();
+            var response = JSON.parse(JSON.stringify(data));
+
+            for (var i = 0; i < response.result.length; i++) {
+
+                  document.getElementById("error-email").innerHTML = "";
+                  if (response.result[i].email == email) {
+                        login.disabled = false;
+                        break;
+                  }
+                  else {
+                        document.getElementById("error-email").innerHTML = "this email id is not exits";
+                        login.disabled = 'disabled';
+                  }
+            }
+      }
+      async function check_pass() {
+
+          login.disabled ='disabled';
+          document.getElementById("error-psw").innerHTML = "";
+          var pwd = document.getElementById("psw").value;
+          var email = document.getElementById("email").value;
+          var res= await fetch(`/checkpass?email=${email}&passward=${pwd}`);
+          var data = await res.json();
+           if(data.result1 == false)
+           {
+            document.getElementById("error-psw").innerHTML = "please check your emailid and password";
+            login.disabled = 'disabled';
+           }
+           else{
+            login.disabled = false;
+            document.getElementById("error-psw").innerHTML="";
+      }
+}
+</script>
+</html>
