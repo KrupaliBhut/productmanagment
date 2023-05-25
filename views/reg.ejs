@@ -19,7 +19,7 @@
             <h3>Welcome </h3>
             <div class="form">
 
-                <form method="post" id="form" onsubmit="validate()" action="/reg">
+                <form method="post" id="form" onsubmit="validate()" action="/auth/register">
                     <div class="row">
                         <label class="label">Name:</label>
                         <input class="input" type="text" name="name" placeholder="Enter name" id="name">
@@ -35,16 +35,29 @@
                         <input class="input" type="password" name="passward" placeholder="Enter password" id="psw">
                     </div>
                     <span id="error-psw" class="error"></span>
-                    <div class="row">
+                     <div class="row">
                      <!-- <input type="submit" class="btn" value="Sign Up"></a> -->
+                     <input type="submit" value="Sign up" id="register" class="submit-btn"
+                     onclick="return formValidation()">
+ 
+                    </div> 
                    
-                    </div>
-                    <div>
+                <span id="errmsg" onchange="return validateName()"></span>
+
+                
+
+               
+
+                   <div>
                         <div class="dont">
-                            <a href="/login">signup</a>
-                            <a href="/login">Login Here</a>
+                            <!-- <a href="/login">signup</a>
+                            <a href="/login">Login Here</a> -->
+                            <div class="link" id="signup">Already have an account?<a href="/auth/login">Login Here.</a>
+
+
+                            </div>
                         </div>
-                    </div>
+                    </div> 
                 </form>
             </div>
         </div>

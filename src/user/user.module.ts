@@ -5,10 +5,10 @@ import { PrismaService } from 'src/prisma/prisma.service';
 import { AtStrategy } from './strategies/at.strategy';
 import { RtStrategy } from './strategies/rt.strategy';
 import { JwtModule } from '@nestjs/jwt';
-
+import { GoogleStrategy } from 'src/google.strategy';
 @Module({
-  imports: [JwtModule.register({})],
+  imports: [JwtModule],
   controllers: [UserController],
-  providers: [UserService, PrismaService],
+  providers: [UserService, PrismaService, GoogleStrategy],
 })
 export class UserModule {}

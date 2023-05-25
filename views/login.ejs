@@ -21,7 +21,7 @@
 
                   <h3>Welcome back</h3>
                   <div class="form">
-                        <form method="post" id="form" onsubmit="validate()" action="/login">
+                        <form method="post" id="form" onsubmit="validate()" action="/auth/dashboard">
 
                               <div class="row">
                                     <label class="label">Email</label>
@@ -39,14 +39,24 @@
                                     <span id="error-psw" class="error"></span>
 
                                     <div>
-                                          <div class="row">
-                                                <!-- <input type="submit" class="btn" value="Login" name="login" id="login"></a> -->
-                                                <a href="/dashboard">login</a>
-                                          </div> 
+                                           <div class="row">
+                                                <!-- <input type="submit" class="btn" value="Login" name="login" id="login"></a>
+                                                <a href="/dashboard">login</a> -->
+                                         
+                                          <div class="link" id="forget-pwd"> Forget Password? 
+                                                <a href="#">Click Here</a></div>
+                                          <br><input type="submit" value="Login" id="login" class="submit-btn">
+                                    </div>  
+                                          <div><a href="/auth/google">Google</a></div>
+                  
+                                          <div  class="link" id="signup">Don't have an account?<a href="/auth/register">Sign up Here.</a>
+                  
+                                          </div>
+                  
                                     </div>
                                     <div>
 
-                                          <div class="dont">
+                                          <!-- <div class="dont">
                                                 <div>
                                                       <div class="dont">
                                                             <h5>Forgot password ?</h5>
@@ -54,7 +64,7 @@
                                                             <a href="/verification">for verification</a>
                                                       </div>
                                                 </div>
-                                          </div>
+                                          </div> -->
                         </form>
                                     </div>
             </div>
