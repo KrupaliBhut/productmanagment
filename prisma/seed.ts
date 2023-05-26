@@ -1,4 +1,8 @@
-import { user_relation, permission } from './migrations/user_relation';
+import {
+  user_relation,
+  permission,
+  category,
+} from './migrations/user_relation';
 import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
@@ -15,6 +19,13 @@ async function main2() {
   for (const Permission of permission) {
     await prisma.permission.createMany({
       data: Permission,
+    });
+  }
+}
+async function main4() {
+  for (const Category of category) {
+    await prisma.category.createMany({
+      data: Category,
     });
   }
 }
@@ -49,3 +60,11 @@ main2()
 //   .finally(() => {
 //     prisma.$disconnect();
 //   });
+main4()
+  .catch((e) => {
+    console.log(e);
+    process.exit();
+  })
+  .finally(() => {
+    prisma.$disconnect();
+  });

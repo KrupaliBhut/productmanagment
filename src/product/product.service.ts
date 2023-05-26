@@ -1,46 +1,40 @@
 import { Injectable } from '@nestjs/common';
-import { CreateUserDto } from 'src/user/user.dto/user.dto';
+import { PrismaClient } from '@prisma/client';
+import { CategoriesController } from 'src/categories/categories.controller';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
-
+const prisma = new PrismaClient();
 @Injectable()
 export class ProductsService {
-  createProduct(createUserDto: CreateUserDto, req: any, res: any) {
-      throw new Error('Method not implemented.');
-  }
-  constructor(private prismaService: PrismaService){}
+  constructor(private prismaService: PrismaService) {}
 
   async create(createProductDto: CreateProductDto) {
+    const { cname, name, description, price } = createProductDto;
+    console.log('hi');
 
-    try{
-      const { cname, name, description, price } = createProductDto;
-
-      return await this.prismaService.product.create({data:{
+    const dataenter = await this.prismaService.product.create({
+      data: {
         price,
         description,
         name,
-        categories: {
-          create:[
-            {
-              category:{
-                create:{
-                  cname
-                
-                }
-              }
-            },
-          
-          ],
-          
-        },
-    },
+        // categories: {
+        //   create: [
+        //     {
+        //       category: {
+        //         create: {
+        //           cname,
+        //         },
+        //       },
+        //     },
+        //   ],
+        // },
+      },
       include: {
-      categories:true
-    },
-}})
-}catch(err){
-    throw err;
+        categories: true,
+      },
+    });
+    return dataenter;
   }
 
   async findAll(): Promise<any> {
@@ -65,5 +59,9 @@ export class ProductsService {
 
     // return this.prismaService.product.delete({id})
     // return `This action removes a #${id} product`;
+  }
+  async getproduct() {
+    const productdata = await prisma.product.findMany();
+    return productdata;
   }
 }

@@ -5,22 +5,25 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+      .null{
+        margin-top: 50px;
+      }
+     </style>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body>
 
     <form method="get" action="/auth/user">
         <%- include("dashboard") -%>
+        <div class="null"></div>
     <table class="table">
         <thead>
           <tr>
             <th scope="col">UserId</th>
             <th scope="col">name</th>
             <th scope="col">email</th>
-            <th scope="col">Created_At</th>
-            <th scope="col">Delete</th>
-            <th scope="col">Create</th>
-            <th scope="col">Edit</th>
+            <th scope="col">Manage</th>
           </tr>
         </thead>
         <tbody>
@@ -29,10 +32,14 @@
                 <td> <%= row.id %></td>
                 <td> <%= row.name %></td>
                 <td> <%= row.email %></td>
-                <td> <%= row.created_at %></td>
-                <td><a id="${row.id}" class="nav-link btn-primary text-center text-white rounded-pill" onClick ="DeleteAction(this)">Delete</a></td>
-                <td><a id="${row.id}" class="nav-link btn-primary text-center text-white rounded-pill" onClick ="CreateAction(this)">Create</a></td>
-                <td><a id="${row.id}" class="nav-link btn-primary text-center text-white rounded-pill" onClick ="EditAction(this)">Edit</a></td>
+                <td>
+                  <select id = "myList" onchange = "favTutorial()" >
+                    <option selected> Manage </option>
+                    <option> Delete </option>
+                    <option> Create </option>
+                    <option> Edit </option>
+                    </select>
+                  </td>
             </tr>
         <% } %>
         </tbody>

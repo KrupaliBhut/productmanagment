@@ -1,5 +1,4 @@
-import { PrismaClient, User } from '@prisma/client';
-const prisma = new PrismaClient();
+
 
 import {
   BadRequestException,
@@ -14,19 +13,20 @@ import { Request, Response } from 'express';
 import { userInfo } from 'os';
 import { Tokens } from './types';
 import { jwtSecret } from 'src/utils/constants';
-
+import { PrismaClient, User } from '@prisma/client';
+const prisma = new PrismaClient();
 @Injectable()
 export class UserService {
-  prisma: any;
   // hashPassword: any;
   jwtService: any;
+  prisma: any;
   constructor(private prismaService: PrismaService, private jwt: JwtService) {}
 
   async Register(createUserDto: CreateUserDto, req: Request, res: Response) {
     try {
       console.log(createUserDto);
       const { email, password } = createUserDto;
-      const findUser = await this.prisma.user.findUnique({
+      const findUser = await prisma.user.findUnique({
         where: { email },
       });
 
@@ -52,7 +52,7 @@ export class UserService {
   async Login(createUserDto: CreateUserDto, req: Request, res: Response) {
     try {
       const { email, password } = createUserDto;
-      const findUser = await this.prisma.user.findUnique({
+      const findUser = await prisma.user.findUnique({
         where: { email },
       });
       console.log('finduser');
@@ -76,11 +76,11 @@ export class UserService {
       }
       res.cookie('token', token, {});
 
-      if (findUser.roles === 'Admin') {
-        res.render('admin');
-      } else {
-        res.render('user');
-      }
+      // if (findUser.roles === 'Admin') {
+      //   res.render('admin');
+      // } else {
+      //   res.render('user');
+      // }
     } catch (err) {
       throw err;
     }

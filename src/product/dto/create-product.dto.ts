@@ -10,6 +10,5 @@ export class CreateProductDto {
   @IsNumber()
   price: number;
 
-  @IsString()
   cname: string;
 }

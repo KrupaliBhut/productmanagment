@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-// import { AppController } from './app.controller';
+import { AppController } from './app.controller';
 // import { UserController } from './user/user.controller';
 // import { HomeController } from '../src/user/home.controller';
 import { AppService } from './app.service';
@@ -8,6 +8,7 @@ import { PrismaModule } from './prisma/prisma.module';
 import { UserModule } from './user/user.module';
 import { CategoriesModule } from './categories/categories.module';
 import { ProductModule } from './product/product.module';
+import { PrismaService } from './prisma/prisma.service';
 
 @Module({
   imports: [

@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   UseGuards,
+  Render,
 } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth/jwt-auth.guard';
 import { CategoriesService } from './categories.service';
@@ -23,11 +24,16 @@ export class CategoriesController {
     return this.categoriesService.create(createCategoryDto);
   }
 
+  // @Get()
+  // findAll() {
+  //   return this.categoriesService.findAll();
+  // }
   @Get()
-  findAll() {
-    return this.categoriesService.findAll();
+  @Render('category')
+  async showTable() {
+    const data = await this.categoriesService.getcategory();
+    return { data };
   }
-
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.categoriesService.findOne(+id);

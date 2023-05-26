@@ -11,6 +11,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
+import { CreateProductDto } from 'src/product/dto/create-product.dto';
 import { Tokens } from './types/tokens.type';
 import { CreateUserDto } from './user.dto/user.dto';
 import { UserService } from './user.service';
@@ -44,6 +45,16 @@ export class UserController {
   Dashboard() {
     return { message: 'dashboard page rendered' };
   }
+  // @Post('register')
+  // Register(
+  //   @Body() createUserDto: CreateUserDto,
+  //   @Request() req,
+  //   @Response() res,
+  // ) {
+  //   return this.userService.Register(createUserDto, req, res);
+
+  //   // res.redirect('/login')
+  // }
   @Post('register')
   Register(
     @Body() createUserDto: CreateUserDto,
@@ -51,10 +62,7 @@ export class UserController {
     @Response() res,
   ) {
     return this.userService.Register(createUserDto, req, res);
-
-    // res.redirect('/login')
   }
-
   @Post('login')
   @Render('login')
   Login(@Request() req, @Response() res, @Body() createUserDto: CreateUserDto) {
@@ -69,6 +77,14 @@ export class UserController {
   @Post('/dashboard')
   getdarshboard(@Request() req, @Response() res) {
     res.render('dashboard');
+  }
+  // @Post('/index')
+  // getuserindex(@Request() req, @Response() res) {
+  //   res.render('userindex');
+  // }
+  @Get('/shop')
+  getshop(@Request() req, @Response() res) {
+    res.render('shop');
   }
   @Get('/user')
   @Render('user')

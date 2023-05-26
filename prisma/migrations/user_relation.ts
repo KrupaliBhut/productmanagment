@@ -6,6 +6,26 @@ export const user_relation = [
     name: 'User',
   },
 ];
+export const category = [
+  {
+    cname: 'kitchen',
+  },
+  {
+    cname: 'furniture',
+  },
+  {
+    cname: 'clothing',
+  },
+  {
+    cname: 'jwellary',
+  },
+  {
+    cname: 'electronics',
+  },
+  {
+    cname: 'toys',
+  },
+];
 export const permission = [
   {
     name: 'create',

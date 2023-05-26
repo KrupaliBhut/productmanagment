@@ -94,21 +94,16 @@
 
 
         <% for(var i=0;i<users.length;i++) {%>
-
-            <tr>
-                
+            <tr> 
                 <td>
                    <%=i+1%>
                 </td>
                 <td>
-                    <%= users[i].email %>
+                    <%= user[i].email %>
                 </td>
-               
                 <td> <span onclick="confirmation(`<%= users[i].id %>`)"> Delete</span></td>
                 <!-- <td> <span onclick="updateUser()" id="edit">Edit </span></td> -->
                 <td><button onclick="updateUser()" id="edit">Edit</button></td>
-
-
             </tr>
             <% } %>
 
